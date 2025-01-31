@@ -20,8 +20,8 @@ public class Paddle : MonoBehaviour
         var moveDelta = moveValue * moveSpeed * Time.deltaTime;
 
         // Compute bounds
-        var minPosY = -(GameManager.s_instance.playArea.y / 2) + transform.localScale.y / 2;
-        var maxPosY = (GameManager.s_instance.playArea.y / 2) - transform.localScale.y / 2;
+        var minPosY = -GameManager.s_instance.playArea.y + transform.localScale.y / 2;
+        var maxPosY = GameManager.s_instance.playArea.y - transform.localScale.y / 2;
 
         // Add movement to pos
         var pos = transform.position;
@@ -34,9 +34,13 @@ public class Paddle : MonoBehaviour
         var rb = other.GetComponent<Rigidbody>();
         var speed = rb.linearVelocity.magnitude;
 
-        // Compute ball's distance 'along' paddle (0-1)
+        // Compute ball's relative pos
         var selfMinY = transform.position.y - transform.localScale.y / 2;
-        var hitYPercent = (rb.transform.position.y - selfMinY) / transform.localScale.y;
+        var ballY = other.transform.position.y;
+        var ballYRelative = ballY - selfMinY;
+
+        // Compute percent distance along paddle (0 to 1)
+        var hitYPercent = ballYRelative / transform.localScale.y;
 
         // Compute new direction
         var newDir = new Vector3(-Mathf.Sign(rb.linearVelocity.x), (hitYPercent * 2) - 1, 0);
@@ -44,7 +48,7 @@ public class Paddle : MonoBehaviour
         newDir.y *= GameManager.s_instance.playArea.y;
         newDir = newDir.normalized;
 
-        // Compute final velocity
+        // Compute final velocity with speed increment
         rb.linearVelocity = newDir * (speed + GameManager.s_instance.ballSpeedIncrement);
     }
 }

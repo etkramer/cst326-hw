@@ -33,14 +33,14 @@ public class GameManager : MonoBehaviour
         {
             score2++;
             lastScored = 2;
-            Debug.Log($"Player 2 scored. New score is {score1}:{score2}");
+            Debug.Log($"Right player scored: {score2}");
             NewRound();
         }
         else if (ball.transform.position.x > playArea.x / 1)
         {
             score1++;
             lastScored = 1;
-            Debug.Log($"Player 1 scored. New score is {score1}:{score2}");
+            Debug.Log($"Left player scored: {score1}");
             NewRound();
         }
 
