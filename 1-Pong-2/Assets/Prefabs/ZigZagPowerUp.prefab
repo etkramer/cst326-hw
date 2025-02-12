@@ -121,5 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a655f1cbd728e464fb5809e8530d7092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitSoundPitchOverride: 0.75
   speed: 5
   interval: 0.25

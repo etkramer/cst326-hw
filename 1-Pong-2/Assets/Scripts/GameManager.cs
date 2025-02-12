@@ -5,7 +5,10 @@ using UnityEngine.Rendering;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager s_instance;
+    public static GameManager s_instance { get; private set; }
+
+    public Ball Ball { get; private set; }
+    public int LastScoringPlayer { get; private set; }
 
     public GameObject ballPrefab;
     public Paddle paddle1;
@@ -18,12 +21,6 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText2;
 
     public Vector2 playArea;
-
-    [HideInInspector]
-    public Ball ball;
-
-    [HideInInspector]
-    public int lastScored;
 
     readonly List<GameObject> powerUps = new();
 
@@ -39,18 +36,18 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // Has ball left play area?
-        if (ball.transform.position.x < playArea.x / -1)
+        if (Ball.transform.position.x < playArea.x / -1)
         {
             score2++;
-            lastScored = 2;
+            LastScoringPlayer = 2;
             ScoreChanged();
 
             NewRound();
         }
-        else if (ball.transform.position.x > playArea.x / 1)
+        else if (Ball.transform.position.x > playArea.x / 1)
         {
             score1++;
-            lastScored = 1;
+            LastScoringPlayer = 1;
             ScoreChanged();
 
             NewRound();
@@ -82,7 +79,7 @@ public class GameManager : MonoBehaviour
     {
         score1 = 0;
         score2 = 0;
-        lastScored = 2;
+        LastScoringPlayer = 2;
         NewRound();
         ScoreChanged();
     }
@@ -108,13 +105,13 @@ public class GameManager : MonoBehaviour
 
     void ResetBall()
     {
-        if (ball != null)
+        if (Ball != null)
         {
-            Destroy(ball.gameObject);
+            Destroy(Ball.gameObject);
         }
 
         // Spawn ball
-        ball = Instantiate(ballPrefab).GetComponent<Ball>();
+        Ball = Instantiate(ballPrefab).GetComponent<Ball>();
     }
 
     void ResetPowerUps()

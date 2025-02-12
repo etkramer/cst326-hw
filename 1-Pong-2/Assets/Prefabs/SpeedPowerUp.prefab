@@ -121,3 +121,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7919815c7b454755be948faea3c2dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitSoundPitchOverride: 2
+  speedMult: 2

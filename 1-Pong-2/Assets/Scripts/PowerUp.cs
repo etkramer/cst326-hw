@@ -3,12 +3,11 @@ using UnityEngine;
 
 public abstract class PowerUp : MonoBehaviour
 {
-    protected Ball ball;
+    public float hitSoundPitchOverride = -1;
 
     void OnTriggerEnter(Collider other)
     {
-        ball = other.GetComponent<Ball>();
-        if (ball == null)
+        if (!other.TryGetComponent<Ball>(out var ball))
         {
             return;
         }

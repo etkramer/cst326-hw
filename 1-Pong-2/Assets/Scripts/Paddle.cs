@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -31,8 +32,8 @@ public class Paddle : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        var rb = other.GetComponent<Rigidbody>();
-        var speed = rb.linearVelocity.magnitude;
+        var ball = other.GetComponent<Ball>();
+        var speed = ball.rb.linearVelocity.magnitude;
 
         // Compute ball's relative pos
         var selfMinY = transform.position.y - transform.localScale.y / 2;
@@ -43,12 +44,20 @@ public class Paddle : MonoBehaviour
         var hitYPercent = ballYRelative / transform.localScale.y;
 
         // Compute new direction
-        var newDir = new Vector3(-Mathf.Sign(rb.linearVelocity.x), (hitYPercent * 2) - 1, 0);
+        var newDir = new Vector3(-Mathf.Sign(ball.rb.linearVelocity.x), (hitYPercent * 2) - 1, 0);
         newDir.x *= GameManager.s_instance.playArea.x;
         newDir.y *= GameManager.s_instance.playArea.y;
         newDir = newDir.normalized;
 
         // Compute final velocity with speed increment
-        rb.linearVelocity = newDir * (speed + GameManager.s_instance.ball.speedIncrement);
+        ball.rb.linearVelocity = newDir * (speed + ball.speedIncrement);
+
+        // Play hit sound
+        var src = GetComponent<AudioSource>();
+        src.pitch = ball.GetHitSoundPitch();
+        src.Play();
+
+        // Increment numHits
+        ball.numHits += 1;
     }
 }

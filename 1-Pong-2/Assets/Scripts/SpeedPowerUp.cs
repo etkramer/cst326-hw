@@ -3,10 +3,12 @@ using UnityEngine;
 
 public class SpeedPowerUp : PowerUp
 {
+    public float speedMult = 2;
+
     public override IEnumerator GetActivateCoroutine(Ball ball)
     {
-        // Speed up ball 2x
-        ball.rb.linearVelocity *= 2f;
+        // Speed up ball by multiplier
+        ball.rb.linearVelocity *= speedMult;
         yield break;
     }
 }
