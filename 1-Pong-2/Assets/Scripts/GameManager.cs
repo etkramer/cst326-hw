@@ -8,8 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager s_instance;
 
     public GameObject ballPrefab;
-    public GameObject paddle1;
-    public GameObject paddle2;
+    public Paddle paddle1;
+    public Paddle paddle2;
 
     public GameObject[] powerUpPrefabs;
     public Transform[] powerUpSpawnPoints;
@@ -17,17 +17,18 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText1;
     public TextMeshProUGUI scoreText2;
 
-    public float ballSpeedInitial;
-    public float ballSpeedIncrement;
-
     public Vector2 playArea;
 
-    GameObject ball;
+    [HideInInspector]
+    public Ball ball;
+
+    [HideInInspector]
+    public int lastScored;
+
     readonly List<GameObject> powerUps = new();
 
     int score1;
     int score2;
-    int lastScored;
 
     void Start()
     {
@@ -109,15 +110,11 @@ public class GameManager : MonoBehaviour
     {
         if (ball != null)
         {
-            Destroy(ball);
+            Destroy(ball.gameObject);
         }
 
         // Spawn ball
-        ball = Instantiate(ballPrefab);
-
-        // Set ball initial velocity
-        var rb = ball.GetComponent<Rigidbody>();
-        rb.linearVelocity = new Vector3(ballSpeedInitial * (lastScored == 2 ? -1 : 1), 0, 0);
+        ball = Instantiate(ballPrefab).GetComponent<Ball>();
     }
 
     void ResetPowerUps()

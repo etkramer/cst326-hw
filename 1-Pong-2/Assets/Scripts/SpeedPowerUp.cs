@@ -3,11 +3,10 @@ using UnityEngine;
 
 public class SpeedPowerUp : PowerUp
 {
-    public override IEnumerator GetCoroutine(Ball ball)
+    public override IEnumerator GetActivateCoroutine(Ball ball)
     {
         // Speed up ball 2x
-        ball.GetComponent<Rigidbody>().linearVelocity *= 2f;
-
-        yield return null;
+        ball.rb.linearVelocity *= 2f;
+        yield break;
     }
 }

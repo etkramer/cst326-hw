@@ -8,12 +8,10 @@ public class ZigZagPowerUp : PowerUp
 
     float timeNextFlip = 0;
 
-    public override IEnumerator GetCoroutine(Ball ball)
+    public override IEnumerator GetActivateCoroutine(Ball ball)
     {
         while (ball)
         {
-            var rb = ball.GetComponent<Rigidbody>();
-
             // Flip direction every (interval) seconds
             if (Time.time >= timeNextFlip)
             {

@@ -49,6 +49,6 @@ public class Paddle : MonoBehaviour
         newDir = newDir.normalized;
 
         // Compute final velocity with speed increment
-        rb.linearVelocity = newDir * (speed + GameManager.s_instance.ballSpeedIncrement);
+        rb.linearVelocity = newDir * (speed + GameManager.s_instance.ball.speedIncrement);
     }
 }

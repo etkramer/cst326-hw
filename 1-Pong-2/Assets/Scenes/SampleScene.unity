@@ -357,8 +357,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: 4456671489594861510, guid: b3f1fb2dec0b844a09aa01070067b87b, type: 3}
-  paddle1: {fileID: 702586986}
-  paddle2: {fileID: 933792355}
+  paddle1: {fileID: 702586991}
+  paddle2: {fileID: 933792360}
   powerUpPrefabs:
   - {fileID: 7343298290048256692, guid: 994aa86b3b5cd4138942f06e874a25a5, type: 3}
   - {fileID: 8295187538048521492, guid: abd8d3c0b5fa74ef285d196a2d3b3fd0, type: 3}
@@ -371,9 +371,9 @@ MonoBehaviour:
   - {fileID: 492506277}
   scoreText1: {fileID: 736909266}
   scoreText2: {fileID: 788137898}
-  ballSpeedInitial: 6
-  ballSpeedIncrement: 1.1
   playArea: {x: 6.6625, y: 4.75}
+  ball: {fileID: 0}
+  lastScored: 0
 --- !u!1 &702586986
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 702586987}
   - component: {fileID: 702586991}
   m_Layer: 0
-  m_Name: PaddleL
+  m_Name: Paddle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -966,7 +966,7 @@ GameObject:
   - component: {fileID: 933792356}
   - component: {fileID: 933792360}
   m_Layer: 0
-  m_Name: PaddleR
+  m_Name: Paddle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
