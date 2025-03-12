@@ -35,6 +35,12 @@ public class GameManager : MonoBehaviour
         {
             _score = value;
             scoreText.text = _score.ToString("0000");
+
+            // If this will be our new high score, store it in session state but don't update until next round.
+            if (_score > HighScore)
+            {
+                HighScore = _score;
+            }
         }
     }
 
@@ -78,9 +84,6 @@ public class GameManager : MonoBehaviour
 
         Score = 0;
         GameSpeed = 1f;
-
-        // Set high score
-        HighScore = Mathf.Max(HighScore, Score);
 
         // (Re)spawn player
         if (_player)

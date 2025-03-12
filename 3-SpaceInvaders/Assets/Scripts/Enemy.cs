@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
     {
         if (animator)
         {
-            animator.speed = 0.1f * GameManager.Instance.GameSpeed;
+            animator.speed = 0.1f * gameSpeed;
         }
     }
 
