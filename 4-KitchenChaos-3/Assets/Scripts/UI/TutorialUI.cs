@@ -66,6 +66,9 @@ public class TutorialUI : MonoBehaviour
 
     private void Hide()
     {
+        // Lock mouse when entering game
+        Cursor.lockState = CursorLockMode.Locked;
+
         gameObject.SetActive(false);
     }
 }

@@ -107,11 +107,15 @@ public class KitchenGameManager : MonoBehaviour
         isGamePaused = !isGamePaused;
         if (isGamePaused)
         {
+            // Unlock mouse in menus
+            Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0f;
             OnGamePaused?.Invoke(this, EventArgs.Empty);
         }
         else
         {
+            // Re-lock mouse outside of menus
+            Cursor.lockState = CursorLockMode.Locked;
             Time.timeScale = 1f;
             OnGameUnpaused?.Invoke(this, EventArgs.Empty);
         }

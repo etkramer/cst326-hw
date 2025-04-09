@@ -73,10 +73,25 @@ public class GameInput : MonoBehaviour
 
     public Vector2 GetMovementVectorNormalized()
     {
+        // Get relative input vector from the player
         var inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
 
-        inputVector = inputVector.normalized;
-        return inputVector;
+        // Get camera forward/right vectors
+        var cameraForward = Camera.main.transform.forward;
+        var cameraRight = Camera.main.transform.right;
+
+        // Get rid of y component from look vectors
+        cameraForward.y = 0;
+        cameraRight.y = 0;
+        cameraForward.Normalize();
+        cameraRight.Normalize();
+
+        // Make camera-relative movement vectors
+        var movementForward = inputVector.y * new Vector2(cameraForward.x, cameraForward.z);
+        var movementRight = inputVector.x * new Vector2(cameraRight.x, cameraRight.z);
+
+        // Return movement vector relative to camera
+        return (movementForward + movementRight).normalized;
     }
 
     public string GetBindingText(Binding binding)
