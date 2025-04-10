@@ -2,12 +2,13 @@ public class DeliveryCounter : BaseCounter
 {
     public static DeliveryCounter Instance { get; private set; }
 
-    void Awake()
+    public override void Awake()
     {
         Instance = this;
+        base.Awake();
     }
 
-    public override void Interact(Player player)
+    public override void Interact(ICharacter player)
     {
         if (player.HasKitchenObject())
         {

@@ -1,12 +1,16 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseCounter : MonoBehaviour, IKitchenObjectParent
 {
+    public static List<BaseCounter> All { get; } = new();
+
     public static event EventHandler OnAnyObjectPlacedHere;
 
     public static void ResetStaticData()
     {
+        All.Clear();
         OnAnyObjectPlacedHere = null;
     }
 
@@ -15,15 +19,14 @@ public class BaseCounter : MonoBehaviour, IKitchenObjectParent
 
     private KitchenObject kitchenObject;
 
-    public virtual void Interact(Player player)
+    public virtual void Awake()
     {
-        // Debug.LogError("BaseCounter.Interact();");
+        All.Add(this);
     }
 
-    public virtual void InteractAlternate(Player player)
-    {
-        // Debug.LogError("BaseCounter.InteractAlternate();");
-    }
+    public virtual void Interact(ICharacter player) { }
+
+    public virtual void InteractAlternate(ICharacter player) { }
 
     public Transform GetKitchenObjectFollowTransform()
     {

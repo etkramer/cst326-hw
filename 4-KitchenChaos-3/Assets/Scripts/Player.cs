@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Player : MonoBehaviour, IKitchenObjectParent
+public class Player : MonoBehaviour, ICharacter
 {
     public static Player Instance { get; private set; }
 

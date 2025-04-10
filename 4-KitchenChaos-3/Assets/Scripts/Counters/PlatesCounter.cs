@@ -1,8 +1,10 @@
 using System;
 using UnityEngine;
 
-public class PlatesCounter : BaseCounter, IKitchenObjectParent
+public class PlatesCounter : BaseCounter
 {
+    public static PlatesCounter Instance { get; private set; }
+
     public event EventHandler OnPlateSpawned;
     public event EventHandler OnPlateRemoved;
 
@@ -13,6 +15,12 @@ public class PlatesCounter : BaseCounter, IKitchenObjectParent
     private float spawnPlateTimerMax = 4f;
     private int platesSpawnedAmount;
     private int platesSpawnedAmountMax = 4;
+
+    public override void Awake()
+    {
+        Instance = this;
+        base.Awake();
+    }
 
     void Update()
     {
@@ -32,7 +40,7 @@ public class PlatesCounter : BaseCounter, IKitchenObjectParent
         }
     }
 
-    public override void Interact(Player player)
+    public override void Interact(ICharacter player)
     {
         if (!player.HasKitchenObject())
         {
@@ -46,4 +54,6 @@ public class PlatesCounter : BaseCounter, IKitchenObjectParent
             }
         }
     }
+
+    public bool HasPlate() => platesSpawnedAmount >= 1;
 }
